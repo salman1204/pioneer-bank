@@ -1,14 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pioneer Bank</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+
+
+
+<div id="front-page" class="container">
     <h1 class="text-center"> Welcome to Pioneer Bank </h1>
 
+    <div class="login-form mt-5">
+        <label for="email" class="my-3">Email</label>
+        <input type="text" name="email" id="" class="form-control" placeholder="Enter Email">
+        <label for="password" class="my-3">Password</label>
+        <input type="password" name="password" id="" class="form-control" placeholder="Enter Password">
+        <button id="login" class="btn btn-success mt-4">Log in</button>
+    </div>
+</div>
+
+<div id="transaction-page">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="deposit style">
+                <h5>Deposit</h5>
+                <h1>$ <span id="current-deposit">00</span></h1>
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="withdraw style">
+                <h5>Withdraw</h5>
+                <h1>$<span id="current-withdraw">00</span></h1>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="balance style">
+                <h5>Balance</h5>
+                <h1>$ <span id="current-balance">1240</span></h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="login-form">
+                <h5>Deposit</h5>
+                <input id="deposit-ammount" type="text" name="" id="" class="form-control"
+                    placeholder="$ you want to deposit"> <br>
+                <button id="deposit-btn" class="btn btn-success">Deposit</button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="login-form">
+                <h5>Withdraw</h5>
+                <input id="withdraw-ammount" type="text" name="" id="" class="form-control" placeholder="$ you want to withdraw"> <br>
+                <button id="withdraw-btn" class="btn btn-success">Withdraw</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    // login even handler
+
+    const loginBtn = document.getElementById('login');
+
+    loginBtn.addEventListener('click', function () {
+
+        const frontPage = document.getElementById('front-page');
+        frontPage.style.display = "none";
+
+        const transactionPage = document.getElementById('transaction-page');
+        transactionPage.style.display = "block";
+        
+    })
+
+    // deposit event handler 
+
+    const depositBtn = document.getElementById('deposit-btn');
+    
+    depositBtn.addEventListener('click', function () {
+
+        var depositAmmount = parseFloat(document.getElementById("deposit-ammount").value);
+
+        updateAmmount("current-balance", depositAmmount);
+        updateAmmount("current-deposit", depositAmmount);
+
+        document.getElementById("deposit-ammount").value = "";
+
+    })
+
+    // Withdraw event Handler
+
+    const withdrawBtn = document.getElementById('withdraw-btn');
+   
+    withdrawBtn.addEventListener('click', function () {
+
+        var withdrawAmmount = parseFloat(document.getElementById("withdraw-ammount").value);
+
+        updateAmmount("current-withdraw", withdrawAmmount);
+        updateAmmount("current-balance", -1 * withdrawAmmount);
+
+        document.getElementById("withdraw-ammount").value = "";
+
+    })
+
+    function updateAmmount(id, inputAmmount) {
+            var current = parseFloat((document.getElementById(id).innerText));
+            var total = current + inputAmmount;
+            document.getElementById(id).innerText = total;
+        }
+ 
+
+</script>
 </body>
 </html>
